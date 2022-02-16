@@ -8,7 +8,6 @@ public class Product {
     private int price;
 
     public Product() {
-
     }
 
     public Product(int id, String name, int price) {
@@ -21,11 +20,20 @@ public class Product {
         return id;
     }
 
-      public String getName() {
+    public String getName() {
         return name;
     }
 
-//       @Override
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
+
+    //       @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
 //        if (o == null || getClass() != o.getClass()) return false;

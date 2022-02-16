@@ -10,27 +10,6 @@ public class ProductManager {
         this.repository = repository;
     }
 
-    public ProductManager() {
-    }
-
-
-    public void save(Product product) {
-        repository.save(product);
-    }
-
-    public Product[] findAll() {
-        repository.findAll();
-        return new Product[0];
-    }
-
-    public void findById(int id) {
-        repository.findById(id);
-    }
-
-    public void removeById(int id) {
-        repository.removeById(id);
-    }
-
     public void add(Product product) {
         repository.save(product);
     }
@@ -51,10 +30,4 @@ public class ProductManager {
             return false;
         }
     }
-
-
-
 }
-
-
-

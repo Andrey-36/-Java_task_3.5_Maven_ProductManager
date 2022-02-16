@@ -14,19 +14,6 @@ class ProductManagerTest {
     private Book book = new Book();
     private Smartphone smartphone = new Smartphone();
 
-//    @Test
-//    void shouldCastFromBaseClassOne() {
-//        Product product = new Book();
-//        if (product instanceof Book) {
-//            Book book = (Book) product;
-//        }
-//    }
-//    @Test
-//    void shouldCastFromBaseClassTwo() {
-//        Product product = new Smartphone();
-//        if (product instanceof Smartphone) {
-
-
     @Test
     void shouldSaveProduct() {
         Product first = new Product(1, "book1", 350);
@@ -157,34 +144,64 @@ class ProductManagerTest {
         assertArrayEquals(expected, actual);
     }
 
-
     @Test
-    void add() {
+    void addSmartphone2() {
+        Product product = new Smartphone();
+        if (product instanceof Smartphone) {
+            Smartphone smartphone = (Smartphone) product;
+        }
+        Product third = new Product(3, "Smartphone1", 5000);
+        Product fourth = new Product(4, "Smartphone2", 5500);
+
+        ProductManager manager = new ProductManager(repository);
+        repository.save(third);
+
+        manager.add(fourth);
+
+        Product[] expected = {third, fourth};
+        Product[] actual = repository.findAll();
+        assertArrayEquals(expected, actual);
     }
 
-//    @Test
-//    void searchByBookOne() {
-//        Product first = new Product(1, "book1", 350);
-//        Product second = new Product(2, "book2", 400);
-//        Product third = new Product(3, "Smartphone1", 5000);
-//        Product fourth = new Product(4, "Smartphone2", 5500);
-//
-//        ProductManager repository = new ProductManager();
-//        repository.save(first);
-//        repository.save(second);
-//        repository.save(third);
-//        repository.save(fourth);
-//
-//        manager.searchBy(String.valueOf(first));
-//
-//        Product[] expected = {first};
-//        Product[] actual = repository.findAll();
-//
-//        assertArrayEquals(expected, actual);
-//
-//    }
+    @Test
+    void searchByBookOne() {
+        Product product = new Book();
+        if (product instanceof Book) {
+            Book book = (Book) product;
+        }
+        Product first = new Product(1, "book1", 350);
+        Product second = new Product(2, "book2", 400);
+        Product third = new Product(3, "Smartphone1", 5000);
+        Product fourth = new Product(4, "Smartphone2", 5500);
+
+        ProductManager manager = new ProductManager(repository);
+        repository.save(first);
+
+        manager.searchBy("book1");
+
+        Product[] expected = {first};
+        Product[] actual = repository.findAll();
+        assertArrayEquals(expected, actual);
+    }
 
     @Test
-    void matches() {
+    void searchByBookNotInArray() {
+        Product product = new Book();
+        if (product instanceof Book) {
+            Book book = (Book) product;
+        }
+        Product first = new Product(1, "book1", 350);
+        Product second = new Product(2, "book2", 400);
+        Product third = new Product(3, "Smartphone1", 5000);
+        Product fourth = new Product(4, "Smartphone2", 5500);
+
+        ProductManager manager = new ProductManager(repository);
+        repository.save(first);
+
+        manager.searchBy("book2");
+
+        Product[] expected = {first};
+        Product[] actual = repository.findAll();
+        assertArrayEquals(expected, actual);
     }
 }
