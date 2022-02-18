@@ -3,6 +3,7 @@ package ru.netology.manager;
 import ru.netology.domain.Product;
 import ru.netology.repository.ProductRepository;
 
+
 public class ProductManager {
     private ProductRepository repository;
 
@@ -15,9 +16,11 @@ public class ProductManager {
     }
 
     public Product[] searchBy(String text) {
-        Product[] result = new Product[0];
+        Product[] result = new Product[1];
         for (Product product : repository.findAll()) {
             if (matches(product, text)) {
+                int lastIndex = result.length - 1;
+                result[lastIndex] = product;
             }
         }
         return result;
