@@ -14,7 +14,7 @@ class ProductManagerTest {
     private ProductManager manager = new ProductManager(repository);
     private Book book = new Book();
     private Book book1 = new Book(1, "book1", 350, "Pushkin");
-    private Book book2 = new Book(2, "book1", 350, "Dostoevsky");
+    private Book book2 = new Book(2, "book1", 350, "Pushkin");
     private Book book3 = new Book(3, "book2", 400, "Dostoevsky");
 
     private Smartphone smartphone = new Smartphone();
@@ -48,24 +48,22 @@ class ProductManagerTest {
     void findById() {
         repository.findById(4);
 
-        Product[] expected = {fourth};
-        Product[] actual = manager.searchBy("Smartphone1");
-        assertArrayEquals(expected, actual);
+        Product expected = fourth;
+        Product actual = repository.findById(4);
+        assertEquals(expected, actual);
     }
 
     @Test
     void findByIdAboveArray() {
-
         repository.findById(6);
 
-        Product[] expected = {first, second, third, fourth, fifth};
-        Product[] actual = repository.findAll();
-        assertArrayEquals(expected, actual);
+        Product expected = null;
+        Product actual = null;
+        assertEquals(expected, actual);
     }
 
     @Test
     void removeById() {
-
         repository.removeById(3);
 
         Product[] expected = {first, second, fourth, fifth};
@@ -74,12 +72,27 @@ class ProductManagerTest {
     }
 
     @Test
-    void searchByProduct() {
+    void searchByOneProduct() {
+        manager.searchBy("Smartphone1");
 
-        manager.searchBy("book1");
+        Product[] expected = {fourth};
+        Product[] actual = manager.searchBy("Smartphone1");
+        assertArrayEquals(expected, actual);
+    }
 
+    @Test
+    void searchByTwoProduct() {
         Product[] expected = {first, second};
         Product[] actual = manager.searchBy("book1");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void searchByNotInArray() {
+        manager.searchBy("Smartphone3");
+
+        Product[] expected = {first, second, third, fourth, fifth};
+        Product[] actual = repository.findAll();
         assertArrayEquals(expected, actual);
     }
 }
