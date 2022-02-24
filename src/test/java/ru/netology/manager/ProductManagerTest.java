@@ -46,7 +46,6 @@ class ProductManagerTest {
 
     @Test
     void findById() {
-        repository.findById(4);
 
         Product expected = fourth;
         Product actual = repository.findById(4);
@@ -55,10 +54,11 @@ class ProductManagerTest {
 
     @Test
     void findByIdAboveArray() {
+
         repository.findById(6);
 
         Product expected = null;
-        Product actual = null;
+        Product actual = repository.findById(6);
         assertEquals(expected, actual);
     }
 
@@ -73,7 +73,6 @@ class ProductManagerTest {
 
     @Test
     void searchByOneProduct() {
-        manager.searchBy("Smartphone1");
 
         Product[] expected = {fourth};
         Product[] actual = manager.searchBy("Smartphone1");
@@ -89,10 +88,9 @@ class ProductManagerTest {
 
     @Test
     void searchByNotInArray() {
-        manager.searchBy("Smartphone3");
 
-        Product[] expected = {first, second, third, fourth, fifth};
-        Product[] actual = repository.findAll();
+        Product[] expected = new Product[]{};
+        Product[] actual = manager.searchBy("Smartphone3");
         assertArrayEquals(expected, actual);
     }
 }
